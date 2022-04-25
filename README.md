@@ -1,18 +1,7 @@
----
-title: "Git ??? c'est quoi ce truc ?"
-author: "Benjamin Heuclin, Cirad, AIDA"
-date: "05/04/2022"
-output:
-  html_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: 3
-  pdf_document:
-    toc: yes
-    toc_depth: 3
----
 
 
+# GitLab !!! c'est quoi ce truc
+Heuclin Benjamin, Cirad, UPR AÏDA
 ___
 Le but de ce document est de te présenter les notions de base de Git et GitLab. Ce document se veut synthétique et pratique. Je donne des références si tu veux en apprendre plus. L'objectif est de te montrer l'intérêt de ces outils et comment on peut les mettre en pratique pour travailler efficacement en collaboratif.
 
