@@ -18,7 +18,7 @@ ___
 <!-- **Pierre** : Hello, désolé j'ai modifié le code depuis, j'ai oublié de te l'envoyer. Voici le nouveau "script_final_4.R".  -->
 
 
-Toi aussi tu as connu ce genre de situation ? Tu ne veux plus que ça se reproduise ? Alors passe au outil collaboratif de versionnage Github ou GitLab ! Ces outils permettent de travailler à plusieurs en évitant de s'échanger des fichiers par email et de se perdre dans les multiples versions des fichiers qui circules.
+Toi aussi tu as connu ce genre de situation ? Tu ne veux plus que ça se reproduise ? Alors passe aux outils collaboratifs de versionnage Github ou GitLab ! Ces outils permettent de travailler à plusieurs en évitant de s'échanger des fichiers par email et de se perdre dans les multiples versions des fichiers qui circules.
 
 Et ça tombe bien car le Cirad héberge un serveur GitLab à l'adresse : https://gitlab.cirad.fr/
 Alors profitons-en ! En plus ça fait une ligne de plus sur ton CV ;)
@@ -57,6 +57,8 @@ Lance ensuite l'installateur.
 * Pour linux : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git
 
 
+Plus d'info dans la documentation Cirad : https://gitlab.cirad.fr/cirad/documentation/-/wikis/Installation%20de%20Git%20sur%20Windows
+
 
 
 ## Configurations de Git
@@ -65,11 +67,11 @@ Sinon tu peux aussi en ouvrir un dans Rstudio : Tools > Terminal > New Terminal.
 
 Pour configurer ton nom, il faut rentrer la commande :
 ```
-git config --global user.name "Toto"
+git config --global user.name "Prénom Nom"
 ```
 Et pour ton adresse email :
 ```
-git config --global user.email "toto@cirad.fr"
+git config --global user.email "email@cirad.fr"
 ```
 
 ## Configuration de la connexion entre ton ordi et le serveur GitLab du Cirad (ou Github)
@@ -94,105 +96,156 @@ La encore, Rstudio est là pour t'aider. Cette étape est à faire une seule foi
 
 # Initialisation d'un projet 
 
+Vidéo -> https://youtu.be/Ly30zu8epwI
+
+
 ## Clonage d'un projet depuis GitLab vers ton ordi 
 
 **Depuis Rstudio :** "File > New project > Version Control > GIT". Il faut ensuite recopier l'url (SSH ou HTTPS) du projet depuis la page d'accueil du projet sur GitLab et choisir le chemin sur son ordi.
 
-**Depuis un terminal** (Git Bash sous Windows)
-```
-git clone username@host:/path/to/repository
-```
+![](images/clone.PNG)
+
 
 ## Création d'un nouveau projet collaboratif
 
-Le plus simple est de créer un nouveau projet sur GitLab puis de le cloner sur son ordi en suivant les étapes décrites juste au-dessus. 
+Il faut créer un nouveau projet sur GitLab puis de le cloner sur son ordi en suivant les étapes décrites juste au-dessus. 
 
-Pour créer un nouveau projet sur le serveur GitLab.Cirad, il faut se rapprocher d'un administrateur à l'adresse suivante : ....
+Pour créer un nouveau projet sur le serveur GitLab.Cirad, il faut se rapprocher d'un administrateur.
 
 
 
 ## Connecter un projet local existant à GitLab
 
+
 Cette opération va nécessiter plusieurs étapes :
 
-1. Il faut d'abord initialiser git sur ton projet local 
-    + Il faut créer un Rproject, même si tu n'as pas de code R dans ton projet c'est pas gênant. 
-      Pour créer un Rproject dans un dossier de projet existant : File > New project... > Existing Directory. Tu peux alors choisir le dossier de ton projet existant. 
+1. Il faut que le projet soit sous la forme d'un Rproject (même s'il n'y a pas de code R)
+    + Si c'est pas le cas, dans Rstudio : File > New project... > Existing Directory. Tu peux alors choisir le dossier de ton projet existant. 
 
       Tu constateras que Rstudio a créé un nouveau fichier "nom_de_mon_dossier.Rproj". Ainsi, la prochaine fois que tu veux enregistrer une version de ton projet avec Rstudio, tu pourras double-cliquer sur ce fichier Rproj.
 
-    + Ensuite, il faut connecter ton Rproj à Git. Pour cela, il faut aller dans "Tools > Version Control > Project setup... " dans l'onglet "Git/SVN", changer l'option "Version control system" de "(None)" en "Git". Confirme et redémare Rstudio.
 
-2. Il faut créer un projet sur GitLab. Se rapprocher d'un administrateur si tu n'as pas les droits à l'adresse : ...
+2. Il faut créer un projet sur GitLab. Se rapprocher d'un administrateur si tu n'as pas les droits. Copie l'adresse SSH ou FTTPS du projet GitLab.
 
-3. Il faut ensuite faire communiquer ton projet distant et projet local ensemble ...
+3. Il faut ensuite faire communiquer ton projet local et ton projet GitLAb ensemble et envoyer le contenu local sur GitLab. Pour cela, il faut ouvrir un terminal, avec Rstudio -> "Tools > Terminal > New Terminal". Il faut ensuite rentrer les lignes de codes suivantes (une à une) en remplaçant l'adresse SSH par celle du projet GitLab :
 
-**Depuis un terminal** (Git Bash sous Windows)
+
 ```
-git remote add origin <server>
+git init --initial-branch=master 
+git remote add origin ssh://git@gitlab.cirad.fr:2022/benjamin.heuclin/mon_projet.git 
+git add . 
+git commit -m "Initial commit" 
+git push -u origin master 
 ```
 
-4. Maintenant que la connexion est établie, il faut envoyer le contenu de ton projet local sur ton GitLab ....
+4. Il faut ensuite redémarrer Rstudio. L'onglet Git apparaît alors en haut à droite.
 
 
+# Deux fichiers importants
+
+## Le ".gitignore"
+
+Permet de définir des fichiers à ignorer dans les sauvegardes. Il peut être édité avec Rstudio 
+
+![](images/ignore2.PNG)
+
+On peut, par exemple : 
+
+* ignorer des fichiers finiçants par l'extension ".Rhistory"
+```
+*.Rhistory
+```
+
+* ignorer le dosier "Data"
+
+```
+Data*
+```
+
+* excepter le fichier "données.xlsx" du dossier "Data" avec "!"
+
+```
+!Data/données.xlsx
+```
+
+
+## Le "README.md"
+
+* Ce fichier, indispensable, permet de décrire / présenter le projet
+* Il est affiché sur la page d’accueil du projet sur GitLab
+* Très important lorsque tu partages ton projet avec le monde entier
+* C’est du Markdown, tu peux l’éditer avec Rstudio : 
+      -> File > New File > Markdown File
+      
+Plus d'info :
+
+* https://en.wikipedia.org/wiki/README
+
+* https://www.makeareadme.com/
+
+* Guide de référence Markdown : https://commonmark.org/help/
 
 
 
 
 # Utilisation de Git et communication avec GitLab depuis Rstudio
 
+Je présente ici les opérations de bases pour commencer à travailler avec ces outils.
+
 
 ![](images/git-schema.png)
 
 (source de l'image : https://www.git-tower.com/learn/media/pages/git/ebook/en/command-line/remote-repositories/introduction/3249033364-1649235984/basic-remote-workflow.png)
 
-Je présente ici les opérations de bases pour commencer à travailler avec ces outils.
 
 Il faut distinguer les opérations qui se font en local et celles qui vont communiquer avec le serveur distant GitLab. En local, le fichier de ton projet est ce qu'on appelle une copie de travail ("working copy" en vert sur le dessin). Il y a aussi ton répertoire local Git ("local repository" en rouge sur le dessin) qui va contenir toutes des sauvegardes locales. Tu n'es pas obligé de sauvegarder tous les fichiers de ton projet, tu vas donc pouvoir les sélectionner, ils seront alors stockés dans la zone de transit ("staging area" en jaune sur le dessin).
 
+On va pouvoir tout faire depuis l'onglet Git dans Rstudio (en haut à droite). Depuis ce panneau de contrôle, tu vas pouvoir tout gérer, plus besoin de passer par un terminal, c'est génial non ? 
 
 
-**En local**, tu vas pouvoir sauvegarder 
-Les opérations les plus utilisées sont :
 
-* "**status**" pour voir les fichiers qui ont été modifié depuis la dernière sauvegarde (commit)
+**En local :**
 
-* "**add**" pour sélectionner les fichiers avec lesquels tu veux faire une sauvegarde (mise en zone de transit)
+![](images/commandes_git.PNG)
 
-* "**commit**" pour envoyer les fichiers en zone de transit dans une sauvegarde dans le répertoire local 
 
-* Il est également possible de créer des branches pour travailler en parallèle 
+**Opérations de base pour communiquer avec GitLab :**
 
-* Tu peux revenir sur une précédente sauvegarde 
+![](images/commandes_gitlab.PNG)
 
+
+
+**L'historique**
+
+L'historique permet de voir l'arborescence des sauvegardes. C'est le bouton en forme d'horloge.
+
+
+![](images/history.PNG)
+
+* Tu peux voir qui a fait des modifications
+* Tu peux voir ce qui a été modifié
 * Tu peux récupérer un fichier spécifique dans une précédente sauvegarde
+* Il est également possible de créer des branches pour travailler en parallèle
+
+![](images/branche.PNG)
 
 
+# Resources 
 
-**Opérations de base pour communiquer avec GitLab**
+Pour en apprendre plus :
 
-* "**push**" pour envoyer ton projet de ton répertoire local (en rouge sur le dessin) vers GitLab et ainsi pouvoir mettre à jour le projet sur GitLab pour tout le monde.
+* https://www.jesuisundev.com/comprendre-git-en-7-minutes/
+* https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Git_et_RStudio
 
-* "**fetch**" pour importer la dernière version du projet depuis GitLab vers ton répertoire local (en rouge sur le dessin). Il faut ensuite mettre à jour ta copie de travail (en vert sur le dessin) avec la fonction "**merge**".
+Pour le README :
 
-* "**merge**" pour mettre à jour ta copie de travail après avoir fait un "**fetch**". Il risque d'y avoir des conflits à résoudre.
+* https://en.wikipedia.org/wiki/README
+* https://www.makeareadme.com/
+* Guide de référence Markdown : https://commonmark.org/help/
 
-* "**pull**" qui combine les opérations "**fetch**" et "**merge**"
+Documentation Cirad : https://gitlab.cirad.fr/cirad/documentation   
 
-
-
-**Opérations générales**
-
-* "**log**" pour voir l'arborescence des sauvegardes.
-
-
-
-Dans Rstudio, on va pouvoir faire toutes ces opérations depuis l'onglet "Git" dans la fenêtre en haut à droite (l'onglet n'apparaît que si tu as bien configuré les choses). De là, tu vas pouvoir tout gérer, plus besoin de passer par un terminal, c'est génial non ? 
-
-
-![](images/git_rstudio.PNG)
-
-
+Vidéo d’initialisation de projet : https://youtu.be/Ly30zu8epwI
 
 
 
