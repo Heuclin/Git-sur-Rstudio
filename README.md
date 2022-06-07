@@ -2,6 +2,9 @@
 
 # GitLab !!! c'est quoi ce truc
 Heuclin Benjamin, Cirad, UPR AÏDA
+
+Licence : <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.
+
 ___
 Le but de ce document est de te présenter les notions de base de Git et GitLab. Ce document se veut synthétique et pratique. Je donne des références si tu veux en apprendre plus. L'objectif est de te montrer l'intérêt de ces outils et comment on peut les mettre en pratique pour travailler efficacement en collaboratif.
 
