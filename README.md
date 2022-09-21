@@ -1,12 +1,22 @@
 
+![](images/logos.png)
 
-# GitLab !!! c'est quoi ce truc
-Heuclin Benjamin, Cirad, UPR AÏDA
+
+GitLab !!! c'est quoi ce truc
+=============================
+
+***Axe transversal TIM AIDA***
+
+*Benjamin Heuclin, Ingénieur statisticien, UR AIDA, Cirad*
+
+*Juin 2022*
 
 Licence : <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.
 
+
+
 ___
-Le but de ce document est de te présenter les notions de base de Git et GitLab. Ce document se veut synthétique et pratique. Je donne des références si tu veux en apprendre plus. L'objectif est de te montrer l'intérêt de ces outils et comment on peut les mettre en pratique pour travailler efficacement en collaboratif.
+Le but de ce document est de te présenter les notions de base de Git et GitLab/Github. Ce document se veut synthétique et pratique. Je donne des références si tu veux en apprendre plus. L'objectif est de te montrer l'intérêt de ces outils et comment on peut les mettre en pratique pour travailler efficacement en collaboratif.
 
 ___
 
@@ -45,7 +55,7 @@ Pour plus de détail sur git, vous pouvez consulter ces articles :
 
 
 
-# Installation et configuration de git et GitLab
+# Installation et configuration de Git et GitLab
 
 Il faut commencer par installer Git sur ton ordi.
 
@@ -231,6 +241,36 @@ L'historique permet de voir l'arborescence des sauvegardes. C'est le bouton en f
 * Il est également possible de créer des branches pour travailler en parallèle
 
 ![](images/branche.PNG)
+
+
+
+
+
+
+
+
+# Pour aller plus loin 
+
+**Synchronisation sur plusieurs forges logiciels** (GitLab, Github, ...) :
+
+Pour voir les *remote* (par défault il doit y en avoir qu'un pour le *fetch* et le *push*)
+```
+git remote -v
+```
+
+Pour ajouter une forge (ex github) :
+```
+git remote set-url origin --add <url_du_depot>
+
+git remote -v
+```
+
+En faisant un *push*, le repertoire sera envoyer sur les differents *remote*.
+
+
+Pour les *pull* depuis plusieurs forges, voir : https://putaindecode.io/articles/garder-ses-depots-git-synchronises-sur-github-gitlab-bitbucket/
+
+
 
 
 # Resources 
