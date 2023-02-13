@@ -326,33 +326,33 @@ L'historique permet de voir l'arborescence des sauvegardes. C'est le bouton en f
 > `name` désigne le nom du répertoire distant (ex : *origin*)
 
 
-**Pour voir les *remote* ** (par défault il doit y en avoir qu'un pour le *fetch* et le *push*)
+**Pour voir les *remote*** (par défault il doit y en avoir qu'un pour le *fetch* et le *push*)
 ```
 git remote -v
 ```
 
-**Ajout d'une autre URL de forge sur un répertoire distant : **
+**Ajout d'une autre URL de forge sur un répertoire distant :**
 ```
 git remote set-url --add <name>  <new_url>
 
 git remote -v
 ```
 
-**Suppression d'une URL de forge sur un répertoire distant : **
+**Suppression d'une URL de forge sur un répertoire distant :**
 ```
 git remote set-url --delete <name> <url>
 
 git remote -v
 ```
 
-**Modification d'une URL de forge sur un répertoire distant : **
+**Modification d'une URL de forge sur un répertoire distant :**
 ```
 git remote set-url <name> <newurl> <oldurl>
 
 git remote -v
 ```
 
-**Suppression d'un répertoire distant (et de toutes les URL de forge) : **
+**Suppression d'un répertoire distant (et de toutes les URL de forge) :**
 ```
 git git remote rm <name> 
 
