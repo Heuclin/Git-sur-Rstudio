@@ -33,7 +33,7 @@ ___
     1. [Le ".gitignore"](#gitignore)
     2. [Le "README.md"](#readme)
 4. [Utilisation de Git et communication avec GitLab depuis Rstudio](#use)
-5. [Pour aller plus loin](#more)
+5. [Gérer ses répertoires distants](#remote)
 6. [Resources](#resources)
 
 ___
@@ -319,28 +319,61 @@ L'historique permet de voir l'arborescence des sauvegardes. C'est le bouton en f
 
 
 
-<a name="more"></a>
+<a name="remote"></a>
 
-# 5. Pour aller plus loin 
+# 5. Gérer ses répertoires distants
 
-**Synchronisation sur plusieurs forges logiciels** (GitLab, Github, ...) :
+> `name` désigne le nom du répertoire distant (ex : *origin*)
 
-Pour voir les *remote* (par défault il doit y en avoir qu'un pour le *fetch* et le *push*)
+
+**Pour voir les *remote* ** (par défault il doit y en avoir qu'un pour le *fetch* et le *push*)
 ```
 git remote -v
 ```
 
-Pour ajouter une forge (ex github) :
+**Ajout d'une autre URL de forge sur un répertoire distant : **
 ```
-git remote set-url origin --add <url_du_depot>
+git remote set-url --add <name>  <new_url>
 
 git remote -v
 ```
 
-En faisant un *push*, le repertoire sera envoyer sur les differents *remote*.
+**Suppression d'une URL de forge sur un répertoire distant : **
+```
+git remote set-url --delete <name> <url>
+
+git remote -v
+```
+
+**Modification d'une URL de forge sur un répertoire distant : **
+```
+git remote set-url <name> <newurl> <oldurl>
+
+git remote -v
+```
+
+**Suppression d'un répertoire distant (et de toutes les URL de forge) : **
+```
+git git remote rm <name> 
+
+git remote -v
+```
+
+**Renomer un répertoire distant :**
+```
+git remote rename <old_name> <new_name>
+
+git remote -v
+```
+
+
+
+Plus d'info ici : **Managing remote repositories :**
+https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories
 
 
 Pour les *pull* depuis plusieurs forges, voir : https://putaindecode.io/articles/garder-ses-depots-git-synchronises-sur-github-gitlab-bitbucket/
+
 
 
 
@@ -348,10 +381,17 @@ Pour les *pull* depuis plusieurs forges, voir : https://putaindecode.io/articles
 
 # 6. Resources 
 
+Documentation Gitlab Cirad : https://gitlab.cirad.fr/cirad/documentation  
+
+Livre  : An introduction R > Chapter 9 Version control with Git and GitHub
+https://intro2r.com/github_r.html
+
+
 Pour en apprendre plus :
 
 * https://www.jesuisundev.com/comprendre-git-en-7-minutes/
 * https://thinkr.fr/travailler-avec-git-via-rstudio-et-versionner-son-code/#Git_et_RStudio
+
 
 Pour le README :
 
@@ -359,15 +399,12 @@ Pour le README :
 * https://www.makeareadme.com/
 * Guide de référence Markdown : https://commonmark.org/help/
 
-Documentation Gitlab Cirad : https://gitlab.cirad.fr/cirad/documentation   
-
+ 
 Vidéo d’initialisation de projet : https://youtu.be/Ly30zu8epwI
 
-Livre  : An introduction R > Chapter 9 Version control with Git and GitHub
-https://intro2r.com/github_r.html
 
-
-
+Managing remote repositories :
+https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories
 
 
 
