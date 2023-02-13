@@ -21,8 +21,8 @@ Le but de ce document est de te présenter les notions de base de Git et GitLab/
 
 ___
 
-1. [Installation et configuration de Git et GitLab](#intall_config)
-    1. [Installation de Git](#intall)
+1. [Installation et configuration de Git et GitLab](#install_config)
+    1. [Installation de Git](#install)
     2. [Configurations de Git](#config_git)
     3. [Configuration de la connexion entre ton ordi et le serveur GitLab du Cirad (ou Github)](#config_ssh)
 2. [Initialisation d'un projet](#init_proj)
