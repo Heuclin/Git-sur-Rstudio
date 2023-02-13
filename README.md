@@ -16,9 +16,28 @@ Licence : <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"
 
 
 ___
+
 Le but de ce document est de te présenter les notions de base de Git et GitLab/Github. Ce document se veut synthétique et pratique. Je donne des références si tu veux en apprendre plus. L'objectif est de te montrer l'intérêt de ces outils et comment on peut les mettre en pratique pour travailler efficacement en collaboratif.
 
 ___
+
+1. [Installation et configuration de Git et GitLab](#intall_config)
+    1. [Installation de Git](#intall)
+    2. [Configurations de Git](#config)
+    3. [Configuration de la connexion entre ton ordi et le serveur GitLab du Cirad (ou Github)](#config_ssh)
+2. [Initialisation d'un projet](#init_proj)
+    1. [Clonage d'un projet depuis GitLab vers ton ordi](#clone)
+    2. [Création d'un nouveau projet collaboratif](#new_project)
+    3. [Connecter un projet local existant à GitLab](#existing_project)
+3. [Deux fichiers importants](#important_file)
+    1. [Le ".gitignore"](#gitignore)
+    2. [Le "README.md"](#readme)
+4. [Utilisation de Git et communication avec GitLab depuis Rstudio](#use)
+5. [Pour aller plus loin](#more)
+6. [Resources](#resources)
+
+___
+
 
 ![](images/git_notfinal.gif)
 
@@ -55,11 +74,12 @@ Pour plus de détail sur git, vous pouvez consulter ces articles :
 
 
 
-# Installation et configuration de Git et GitLab
+
+# 1. Installation et configuration de Git et GitLab {#intall_config}
 
 Il faut commencer par installer Git sur ton ordi.
 
-## Installation de Git
+## 1.1. Installation de Git {#intall}
 
 * Pour windows : http://git-scm.com/download/win
 
@@ -74,9 +94,9 @@ Plus d'info dans la documentation Cirad : https://gitlab.cirad.fr/cirad/document
 
 
 
-## Configurations de Git
+## 1.2. Configurations de Git {#config_git}
 Il faut maintenant configurer Git, notamment ton identité pour savoir qui a fait des modif quand on collabore. Pour cela, il faut ouvrir un terminal. Sous OSX et Linux, pas de problème, le terminal existe. Pour Windows, il faut ouvrir l'application Git Bash qui vient d'être installée avec Git.
-Sinon tu peux aussi en ouvrir un dans Rstudio : Tools > Terminal > New Terminal.
+Sinon tu peux aussi en ouvrir un dans Rstudio : *Tools > Terminal > New Terminal*.
 
 Pour configurer ton nom, il faut rentrer la commande :
 ```
@@ -87,7 +107,7 @@ Et pour ton adresse email :
 git config --global user.email "email@cirad.fr"
 ```
 
-## Configuration de la connexion entre ton ordi et le serveur GitLab du Cirad (ou Github)
+## Configuration de la connexion entre ton ordi et le serveur GitLab du Cirad (ou Github) {#config_ssh}
 
 Pour communiquer sur un projet entre ton ordi perso et ton compte GitLab, il y a deux solutions, soit tu utilises un url https, soit une url SSH. C'est GitLab qui te les génères (bouton "Clone" en bleu sur la page d'accueil du projet (un fois créé)).
 
@@ -98,28 +118,28 @@ Le mieux c'est d'utiliser une connexion SSH, c'est plus sécurisant mais il faut
 La encore, Rstudio est là pour t'aider. Cette étape est à faire une seule fois pour permettre la connexion entre ton ordi et ton compte GitLab. Pas besoin de la refaire pour chaque projet.
 
 
-* Dans Rstudio, va dans "Tools > Global options > Git/SVN > Create RSA Key". Tu peux lui donner un mot de passe mais t'es pas obligé. Cette clé sera enregistrée sur ton ordi à l'adresse qui est proposée. Une fois créer, clique sur "View public key" et copie le contenu. 
+* Dans Rstudio, va dans "*Tools > Global options > Git/SVN > Create RSA Key*". Tu peux lui donner un mot de passe mais t'es pas obligé. Cette clé sera enregistrée sur ton ordi à l'adresse qui est proposée. Une fois créer, clique sur "*View public key*" et copie le contenu. 
 
-* Ensuite dans GitLab. Direction "Profile (en haut à droite, le rond avec un bonhomme) > Edit profile > onglet SSH Keys". Dans la section "Add an SSH key", colle la clé. Opération à répéter si tu as plusieurs ordinateurs.
-
-
+* Ensuite dans GitLab. Direction "*Profile *(en haut à droite, le rond avec un bonhomme) *> Edit profile > onglet SSH Keys*". Dans la section "*Add an SSH key*", colle la clé. Opération à répéter si tu as plusieurs ordinateurs.
 
 
 
 
-# Initialisation d'un projet 
+
+
+# 2. Initialisation d'un projet {#init_proj}
 
 Vidéo -> https://youtu.be/Ly30zu8epwI
 
 
-## Clonage d'un projet depuis GitLab vers ton ordi 
+## 2.1. Clonage d'un projet depuis GitLab vers ton ordi {#clone}
 
-**Depuis Rstudio :** "File > New project > Version Control > GIT". Il faut ensuite recopier l'url (SSH ou HTTPS) du projet depuis la page d'accueil du projet sur GitLab et choisir le chemin sur son ordi.
+**Depuis Rstudio :** *File > New project > Version Control > GIT*. Il faut ensuite recopier l'url (SSH ou HTTPS) du projet depuis la page d'accueil du projet sur GitLab et choisir le chemin sur son ordi.
 
 ![](images/clone.PNG)
 
 
-## Création d'un nouveau projet collaboratif
+## 2.2. Création d'un nouveau projet collaboratif {#new_project}
 
 Il faut créer un nouveau projet sur GitLab puis de le cloner sur son ordi en suivant les étapes décrites juste au-dessus. 
 
@@ -127,20 +147,20 @@ Pour créer un nouveau projet sur le serveur GitLab.Cirad, il faut se rapprocher
 
 
 
-## Connecter un projet local existant à GitLab
+## 2.3. Connecter un projet local existant à GitLab {#existing_project}
 
 
 Cette opération va nécessiter plusieurs étapes :
 
 1. Il faut que le projet soit sous la forme d'un Rproject (même s'il n'y a pas de code R)
-    + Si c'est pas le cas, dans Rstudio : File > New project... > Existing Directory. Tu peux alors choisir le dossier de ton projet existant. 
+    + Si c'est pas le cas, dans Rstudio : *File > New project... > Existing Directory*. Tu peux alors choisir le dossier de ton projet existant. 
 
       Tu constateras que Rstudio a créé un nouveau fichier "nom_de_mon_dossier.Rproj". Ainsi, la prochaine fois que tu veux enregistrer une version de ton projet avec Rstudio, tu pourras double-cliquer sur ce fichier Rproj.
 
 
-2. Il faut créer un projet sur GitLab. Se rapprocher d'un administrateur si tu n'as pas les droits. Copie l'adresse SSH ou FTTPS du projet GitLab.
+2. Il faut créer un nouveau projet sur GitLab ([voir section 2.2. juste au dessus](#new_project)). Se rapprocher d'un administrateur si tu n'as pas les droits. Copie l'adresse SSH ou FTTPS du projet GitLab.
 
-3. Il faut ensuite faire communiquer ton projet local et ton projet GitLAb ensemble et envoyer le contenu local sur GitLab. Pour cela, il faut ouvrir un terminal, avec Rstudio -> "Tools > Terminal > New Terminal". Il faut ensuite rentrer les lignes de codes suivantes (une à une) en remplaçant l'adresse SSH par celle du projet GitLab :
+3. Il faut ensuite faire communiquer ton projet local et ton projet GitLab ensemble et envoyer le contenu local sur GitLab. Pour cela, il faut ouvrir un terminal, avec Rstudio -> *Tools > Terminal > New Terminal*. Il faut ensuite rentrer les lignes de codes suivantes (une à une) en remplaçant l'adresse SSH par celle du projet GitLab :
 
 
 ```
@@ -154,9 +174,9 @@ git push -u origin master
 4. Il faut ensuite redémarrer Rstudio. L'onglet Git apparaît alors en haut à droite.
 
 
-# Deux fichiers importants
+# 3. Deux fichiers importants {#important_file}
 
-## Le ".gitignore"
+## 3.1. Le ".gitignore" {#gitignore}
 
 Permet de définir des fichiers à ignorer dans les sauvegardes. Il peut être édité avec Rstudio 
 
@@ -181,14 +201,41 @@ Data*
 !Data/données.xlsx
 ```
 
+Un exemple de fichier ".gitignore" pour R qui ignore tous les fichiers (cachés) que peut générer Rstudio:
+```
+# History files
+.Rhistory
+.Rapp.history
 
-## Le "README.md"
+# Session Data files
+.RData
+.RDataTmp
 
-* Ce fichier, indispensable, permet de décrire / présenter le projet
-* Il est affiché sur la page d’accueil du projet sur GitLab
-* Très important lorsque tu partages ton projet avec le monde entier
+# User-specific files
+.Ruserdata
+
+# RStudio files
+.Rproj.user/
+
+# R Environment Variables
+.Renviron
+```
+
+Site utile pour la construction du ".gitignore" :
+https://www.toptal.com/developers/gitignore
+
+
+
+
+
+
+## 3.2. Le "README.md"  {#readme}
+
+* Ce fichier, **indispensable**, permet de décrire/présenter le projet
+* Il est affiché sur la page d’accueil du projet sur GitLab/Github
+* Très important lorsque tu partages ton projet avec d'autres personnes
 * C’est du Markdown, tu peux l’éditer avec Rstudio : 
-      -> File > New File > Markdown File
+      -> *File > New File > Markdown File* puis enregistrer avec le nom "README.md"
       
 Plus d'info :
 
@@ -196,12 +243,14 @@ Plus d'info :
 
 * https://www.makeareadme.com/
 
-* Guide de référence Markdown : https://commonmark.org/help/
+* Guide de référence Markdown : 
+  * https://commonmark.org/help/
+  * https://www.markdownguide.org/
 
 
 
 
-# Utilisation de Git et communication avec GitLab depuis Rstudio
+# 4. Utilisation de Git et communication avec GitLab depuis Rstudio {#use}
 
 Je présente ici les opérations de bases pour commencer à travailler avec ces outils.
 
@@ -249,7 +298,7 @@ L'historique permet de voir l'arborescence des sauvegardes. C'est le bouton en f
 
 
 
-# Pour aller plus loin 
+# 5. Pour aller plus loin {#more}
 
 **Synchronisation sur plusieurs forges logiciels** (GitLab, Github, ...) :
 
@@ -273,7 +322,7 @@ Pour les *pull* depuis plusieurs forges, voir : https://putaindecode.io/articles
 
 
 
-# Resources 
+# 6. Resources {#resources}
 
 Pour en apprendre plus :
 
@@ -286,11 +335,12 @@ Pour le README :
 * https://www.makeareadme.com/
 * Guide de référence Markdown : https://commonmark.org/help/
 
-Documentation Cirad : https://gitlab.cirad.fr/cirad/documentation   
+Documentation Gitlab Cirad : https://gitlab.cirad.fr/cirad/documentation   
 
 Vidéo d’initialisation de projet : https://youtu.be/Ly30zu8epwI
 
-
+Livre  : An introduction R > Chapter 9 Version control with Git and GitHub
+https://intro2r.com/github_r.html
 
 
 
